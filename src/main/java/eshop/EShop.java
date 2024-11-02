@@ -87,9 +87,9 @@ public class EShop implements Commands {
         System.err.println("PLEASE INPUT PRODUCT ID");
         int productId = Integer.parseInt(scanner.nextLine());
         Product productById = productService.getProductById(productId);
-        if (productById != null){
+        if (productById != null) {
             productService.deleteProduct(productId);
-        }else {
+        } else {
             System.err.println("PRODUCT WITH " + productId + " ID DOESN'T EXIST");
         }
     }
@@ -98,7 +98,7 @@ public class EShop implements Commands {
         System.out.println(productService.getAllProducts());
         System.out.println("Please input product id");
         String productId = scanner.nextLine();
-        if (productId != null){
+        if (productId != null) {
             Product productById = productService.getProductById(Integer.parseInt(productId));
             System.out.println("Please input product name");
             String productName = scanner.nextLine();
@@ -113,7 +113,7 @@ public class EShop implements Commands {
             int productQty = Integer.parseInt(scanner.nextLine());
             productById.setQty(productQty);
             productService.editProduct(productById);
-        }else {
+        } else {
             System.err.println("WRONG ID");
         }
     }
@@ -123,9 +123,9 @@ public class EShop implements Commands {
         System.err.println("PLEASE INPUT CATEGORY ID");
         int categoryId = Integer.parseInt(scanner.nextLine());
         Category categoryById = categoryService.getCategoryById(categoryId);
-        if (categoryById != null){
+        if (categoryById != null) {
             categoryService.deleteCategory(categoryId);
-        }else {
+        } else {
             System.err.println("CATEGORY WITH " + categoryId + " ID DOESN'T EXIST");
         }
     }
@@ -134,13 +134,13 @@ public class EShop implements Commands {
         System.out.println(categoryService.getAllCategories());
         System.err.println("PLEASE INPUT CATEGORY ID");
         String categoryId = scanner.nextLine();
-        if (categoryId != null){
+        if (categoryId != null) {
             Category categoryById = categoryService.getCategoryById(Integer.parseInt(categoryId));
             System.out.println("Please input category name");
             String categoryName = scanner.nextLine();
             categoryById.setName(categoryName);
             categoryService.editCategory(categoryById);
-        }else {
+        } else {
             System.err.println("WRONG ID");
         }
     }

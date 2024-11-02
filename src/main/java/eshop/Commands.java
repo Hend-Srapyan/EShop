@@ -16,10 +16,7 @@ public interface Commands {
     String PRINT_ALL_PRODUCTS = "11";
     String PRINT_ALL_CATEGORIES = "12";
 
-
-
-
-    static void printCommands(){
+    static void printCommands() {
         System.out.println("Please input " + EXIT + " for EXIT");
         System.out.println("Please input " + ADD_CATEGORY + " for ADD_CATEGORY");
         System.out.println("Please input " + EDIT_CATEGORY_BY_ID + " for EDIT_CATEGORY_BY_ID");

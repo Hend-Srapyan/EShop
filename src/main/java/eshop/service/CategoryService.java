@@ -10,10 +10,8 @@ import java.util.List;
 public class CategoryService {
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
 
-
     public void add(Category category) {
         String sql = "INSERT INTO category(name) VALUES(?)";
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.executeUpdate();
@@ -29,7 +27,6 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         String sql = "SELECT * FROM category";
         List<Category> categories = new ArrayList<>();
-
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
@@ -41,13 +38,11 @@ public class CategoryService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return categories;
     }
 
     public Category getCategoryById(int id) {
         String sql = "SELECT * FROM category WHERE id = " + id;
-
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
@@ -56,12 +51,10 @@ public class CategoryService {
                         .name(resultSet.getString("name"))
                         .build();
                 return category;
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -69,9 +62,7 @@ public class CategoryService {
         if (getCategoryById(id) == null) {
             System.err.println("CATEGORY DOESN'T EXIST");
         }
-
         String sql = "DELETE FROM category WHERE id = " + id;
-
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
             System.err.println("CATEGORY DELETED");
@@ -82,7 +73,6 @@ public class CategoryService {
 
     public void editCategory(Category category) {
         String sql = "UPDATE category SET name = ? WHERE id = " + category.getId();
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.executeUpdate();
@@ -91,5 +81,4 @@ public class CategoryService {
             e.printStackTrace();
         }
     }
-
 }

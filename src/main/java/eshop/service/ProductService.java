@@ -14,7 +14,6 @@ public class ProductService {
 
     public void add(Product product) {
         String sql = "INSERT INTO product(name,description,price,qty,category_id) VALUES(?,?,?,?,?)";
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setString(2, product.getDescription());
@@ -34,7 +33,6 @@ public class ProductService {
     public List<Product> getAllProducts() {
         String sql = "SELECT * FROM product";
         List<Product> products = new ArrayList<>();
-
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
@@ -50,13 +48,11 @@ public class ProductService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return products;
     }
 
     public Product getProductById(int id) {
         String sql = "SELECT * FROM product WHERE id = " + id;
-
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
@@ -69,12 +65,10 @@ public class ProductService {
                         .category(categoryService.getCategoryById(resultSet.getInt("category_id")))
                         .build();
                 return product;
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -82,9 +76,7 @@ public class ProductService {
         if (getProductById(id) == null) {
             System.err.println("PRODUCT DOESN'T EXIST");
         }
-
         String sql = "DELETE FROM product WHERE id = " + id;
-
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
             System.err.println("PRODUCT DELETED");
@@ -94,10 +86,7 @@ public class ProductService {
     }
 
     public void editProduct(Product product) {
-
-
         String sql = "UPDATE product SET name = ?, description = ?, price = ?, qty = ?, category_id = ? WHERE id = " + product.getId();
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setString(2, product.getDescription());
@@ -113,7 +102,6 @@ public class ProductService {
 
     public double getProductMaxPrice() {
         String sql = "SELECT MAX(price) FROM product";
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -127,7 +115,6 @@ public class ProductService {
 
     public double getProductMinPrice() {
         String sql = "SELECT MIN(price) FROM product";
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -141,7 +128,6 @@ public class ProductService {
 
     public double getProductAvgPrice() {
         String sql = "SELECT AVG(price) FROM product";
-
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -154,9 +140,9 @@ public class ProductService {
     }
 
     public int getSumOfProducts() {
-        try  {
-        String sql = "SELECT SUM(qty) FROM product";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        try {
+            String sql = "SELECT SUM(qty) FROM product";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt(1);

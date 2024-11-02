@@ -6,11 +6,9 @@ import java.sql.SQLException;
 
 public class DBConnectionProvider {
     private static DBConnectionProvider instance;
-
     private final String JDBC_URL = "jdbc:mysql://localhost:3306/eshop";
     private final String JDBC_USERNAME = "root";
     private final String JDBC_PASSWORD = "root";
-
     private Connection connection;
 
     private DBConnectionProvider() {
