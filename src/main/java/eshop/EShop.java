@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class EShop implements Commands {
 
-    private static Scanner scanner = new Scanner(System.in);
-    private static CategoryService categoryService = new CategoryService();
-    private static ProductService productService = new ProductService();
+    private final static Scanner scanner = new Scanner(System.in);
+    private final static CategoryService categoryService = new CategoryService();
+    private final static ProductService productService = new ProductService();
 
     public static void main(String[] args) {
         boolean isRun = true;

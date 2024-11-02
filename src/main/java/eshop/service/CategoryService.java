@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService {
-    private Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
 
 
     public void add(Category category) {

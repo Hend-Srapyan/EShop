@@ -1,7 +1,6 @@
 package eshop.service;
 
 import eshop.db.DBConnectionProvider;
-import eshop.model.Category;
 import eshop.model.Product;
 
 import java.sql.*;
@@ -10,8 +9,8 @@ import java.util.List;
 
 public class ProductService {
 
-    private Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private CategoryService categoryService = new CategoryService();
+    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final CategoryService categoryService = new CategoryService();
 
     public void add(Product product) {
         String sql = "INSERT INTO product(name,description,price,qty,category_id) VALUES(?,?,?,?,?)";
@@ -113,7 +112,6 @@ public class ProductService {
     }
 
     public double getProductMaxPrice() {
-        Product product = null;
         String sql = "SELECT MAX(price) FROM product";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -128,7 +126,6 @@ public class ProductService {
     }
 
     public double getProductMinPrice() {
-        Product product = null;
         String sql = "SELECT MIN(price) FROM product";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -143,7 +140,6 @@ public class ProductService {
     }
 
     public double getProductAvgPrice() {
-        Product product = null;
         String sql = "SELECT AVG(price) FROM product";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
